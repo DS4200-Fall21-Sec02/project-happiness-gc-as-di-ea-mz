@@ -44,12 +44,12 @@ var legend = d3.legendColor()
     .shapePadding(4)
     .scale(colorScale);
 svg1.select(".legendThreshold")
-    .call(legend)
-    .attr("x", 0)
-    .attr("y", -100);
+    .call(legend);
+
 
 Promise.all([
 d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
+
 d3.csv("data/2020.csv", function(d) {
   console.log(d);
 
