@@ -73,6 +73,8 @@ d3.csv("data/2020.csv", function(d) {
       })
 });
 
+
+
 var margin2 = { top: 10, right: 30, bottom: 50, left: 60 };
 
 var size = 140,
@@ -109,10 +111,13 @@ d3.csv("data/2020v2.csv").then(function(data) {
 
   const domainByTrait = {}
   const traits = d3.keys(data[0]).filter(d => d !== 'Region')
+  const regions = ['Western Europe','North America and ANZ', 'Middle East and North Africa',
+  'Latin America and Caribbean', 'Central and Eastern Europe', 'East Asia', 'Southeast Asia',
+  'Commonwealth Nations', 'Sub-Saharan Africa', 'South Asia' ]
   const n = traits.length
 
   var color = d3.scaleOrdinal()
-    .domain(traits)
+    .domain(regions)
     .range(d3.schemeCategory10);
 
   traits.forEach(trait => {
@@ -126,8 +131,8 @@ d3.csv("data/2020v2.csv").then(function(data) {
   var svg2 = d3
       .select("#vis-svg-2")
       .append("svg")
-      .attr("width", size * n + padding )
-      .attr("height", size * n + padding)
+      .attr("width", size * n + padding + 150 )
+      .attr("height", size * n + padding + 10)
     .append("g")
       .attr("transform", "translate(" + padding + "," + padding / 2 + ")");
 
@@ -160,13 +165,17 @@ d3.csv("data/2020v2.csv").then(function(data) {
       .attr("dy", ".71em")
       .text(function(d) { return d.x; });
 
+
+
+
   cell.call(brushFx);
 
   svg2.selectAll("mydots")
-  .data(traits)
+  .data(regions)
   .enter()
   .append("rect")
-    .attr("x", 900)
+    .attr("x", 700)
+    .attr("transform", "translate(130,-10)")
     .attr("y", function(d,i){ return 50 + i*(15 + 5)}) // 100 is where the first dot appears. 25 is the distance between dots
     .attr("width", 15)
     .attr("height", 15)
@@ -174,10 +183,11 @@ d3.csv("data/2020v2.csv").then(function(data) {
 
 // Add one dot in the legend for each name.
   svg2.selectAll("mylabels")
-  .data(traits)
+  .data(regions)
   .enter()
   .append("text")
-    .attr("x", 900 + 15*1.2)
+    .attr("x", 700 + 15*1.2)
+    .attr("transform", "translate(130,-10)")
     .attr("y", function(d,i){ return 50 + i*(15+5) + (15/2)}) // 100 is where the first dot appears. 25 is the distance between dots
     .style("fill", function(d){ return color(d)})
     .text(function(d){ return d})
