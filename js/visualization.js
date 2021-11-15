@@ -100,14 +100,6 @@ var yAxis = d3.axisLeft()
 
 var color = d3.scaleOrdinal().range(d3.schemeCategory10);
 
-//export default async function App() {
-  //const data = await csv('data/2020 - Copy.csv')
-  //scatterplotMatrix(data)
-//}
-
-
-
-//function scatterplotMatrix(data) {
 
 
 d3.csv("data/2020v2.csv").then(function(data) {
@@ -185,7 +177,7 @@ d3.csv("data/2020v2.csv").then(function(data) {
       .enter().append("circle")
         .attr("cx", function(d) { return x(d[p.x]); })
         .attr("cy", function(d) { return y(d[p.y]); })
-        .attr("r", 4)
+        .attr("r", 2)
         .style("fill", function(d) { return color(d.Region); });
   }
 
