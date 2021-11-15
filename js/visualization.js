@@ -169,7 +169,7 @@ d3.csv("data/2020v2.csv").then(function(data) {
   .data(traits)
   .enter()
   .append("rect")
-    .attr("x", 700)
+    .attr("x", 800)
     .attr("y", function(d,i){ return 50 + i*(15 + 5)}) // 100 is where the first dot appears. 25 is the distance between dots
     .attr("width", 15)
     .attr("height", 15)
@@ -180,7 +180,7 @@ d3.csv("data/2020v2.csv").then(function(data) {
   .data(traits)
   .enter()
   .append("text")
-    .attr("x", 700 + 15*1.2)
+    .attr("x", 800 + 15*1.2)
     .attr("y", function(d,i){ return 50 + i*(15+5) + (15/2)}) // 100 is where the first dot appears. 25 is the distance between dots
     .style("fill", function(d){ return color(d)})
     .text(function(d){ return d})
