@@ -126,7 +126,7 @@ d3.csv("data/2020v2.csv").then(function(data) {
   var svg2 = d3
       .select("#vis-svg-2")
       .append("svg")
-      .attr("width", size * n + padding)
+      .attr("width", size * n + padding )
       .attr("height", size * n + padding)
     .append("g")
       .attr("transform", "translate(" + padding + "," + padding / 2 + ")");
