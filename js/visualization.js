@@ -16,7 +16,7 @@ const svg1 = d3
 
 const path = d3.geoPath();
 const projection = d3.geoMercator()
-  .scale(70)
+  .scale(130)
   .center([0,20])
   .translate([width / 2, height / 2]);
 
@@ -75,8 +75,7 @@ d3.csv("data/2020.csv", function(d) {
 
 var margin2 = { top: 10, right: 30, bottom: 50, left: 60 };
 
-var size = 130,
-    //size = 230,
+var size = 140,
     padding = 20;
 
 var x = d3.scaleLinear()
@@ -98,16 +97,8 @@ var yAxis = d3.axisLeft()
     .scale(y)
     .ticks(6);
 
-var color = d3.scaleOrdinal().range(d3.schemeCategory10);
-
-//export default async function App() {
-  //const data = await csv('data/2020 - Copy.csv')
-  //scatterplotMatrix(data)
-//}
 
 
-
-//function scatterplotMatrix(data) {
 
 
 d3.csv("data/2020v2.csv").then(function(data) {
@@ -120,6 +111,10 @@ d3.csv("data/2020v2.csv").then(function(data) {
   const traits = d3.keys(data[0]).filter(d => d !== 'Region')
   const n = traits.length
 
+  var color = d3.scaleOrdinal()
+    .domain(traits)
+    .range(d3.schemeCategory10);
+
   traits.forEach(trait => {
     domainByTrait[trait] = d3.extent(data, d => d[trait]);
   });
@@ -131,7 +126,7 @@ d3.csv("data/2020v2.csv").then(function(data) {
   var svg2 = d3
       .select("#vis-svg-2")
       .append("svg")
-      .attr("width", size * n + padding)
+      .attr("width", size * n + padding )
       .attr("height", size * n + padding)
     .append("g")
       .attr("transform", "translate(" + padding + "," + padding / 2 + ")");
@@ -167,6 +162,28 @@ d3.csv("data/2020v2.csv").then(function(data) {
 
   cell.call(brushFx);
 
+  svg2.selectAll("mydots")
+  .data(traits)
+  .enter()
+  .append("rect")
+    .attr("x", 900)
+    .attr("y", function(d,i){ return 50 + i*(15 + 5)}) // 100 is where the first dot appears. 25 is the distance between dots
+    .attr("width", 15)
+    .attr("height", 15)
+    .style("fill", function(d){ return color(d)})
+
+// Add one dot in the legend for each name.
+  svg2.selectAll("mylabels")
+  .data(traits)
+  .enter()
+  .append("text")
+    .attr("x", 900 + 15*1.2)
+    .attr("y", function(d,i){ return 50 + i*(15+5) + (15/2)}) // 100 is where the first dot appears. 25 is the distance between dots
+    .style("fill", function(d){ return color(d)})
+    .text(function(d){ return d})
+    .attr("text-anchor", "left")
+    .style("alignment-baseline", "middle")
+
   function plot(p) {
     var cell = d3.select(this);
 
@@ -185,7 +202,7 @@ d3.csv("data/2020v2.csv").then(function(data) {
       .enter().append("circle")
         .attr("cx", function(d) { return x(d[p.x]); })
         .attr("cy", function(d) { return y(d[p.y]); })
-        .attr("r", 4)
+        .attr("r", 2)
         .style("fill", function(d) { return color(d.Region); });
   }
 
