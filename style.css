@@ -9,6 +9,54 @@ h1, h2, h3 {
 	line-height: 1.2
 }
 
+a {
+  color: #e81c4f;
+}
+
+svg {
+  font: 10px sans-serif;
+  padding: 10px;
+}
+
+
+.axis,
+.frame {
+  shape-rendering: crispEdges;
+}
+
+.axis line {
+  stroke: #ddd;
+}
+
+.axis path {
+  display: none;
+}
+
+.cell text {
+  font-weight: bold;
+  text-transform: capitalize;
+  fill: #777;
+}
+
+.frame {
+  fill: none;
+  stroke: #aaa;
+}
+
+circle {
+  fill-opacity: .7;
+}
+
+circle.hidden {
+  fill: #ccc !important;
+}
+
+.extent {
+  fill: #000;
+  fill-opacity: .125;
+  stroke: #fff;
+}
+
 /* Your text should be in a nice narrow column */
 .content-column {
 	max-width: 650px;
