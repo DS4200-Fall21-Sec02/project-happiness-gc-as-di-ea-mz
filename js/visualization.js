@@ -75,8 +75,7 @@ d3.csv("data/2020.csv", function(d) {
 
 var margin2 = { top: 10, right: 30, bottom: 50, left: 60 };
 
-var size = 160,
-    //size = 230,
+var size = 140,
     padding = 20;
 
 var x = d3.scaleLinear()
