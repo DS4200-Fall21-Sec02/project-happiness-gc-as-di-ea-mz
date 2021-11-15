@@ -109,10 +109,13 @@ d3.csv("data/2020v2.csv").then(function(data) {
 
   const domainByTrait = {}
   const traits = d3.keys(data[0]).filter(d => d !== 'Region')
+  const regions = ['Western Europe','North America and ANZ', 'Middle East and North Africa',
+  'Latin America and Caribbean', 'Central and Eastern Europe', 'East Asia', 'Southeast Asia',
+  'Commonwealth of Independent States', 'Sub-Saharan Africa', 'South Asia' ]
   const n = traits.length
 
   var color = d3.scaleOrdinal()
-    .domain(traits)
+    .domain(regions)
     .range(d3.schemeCategory10);
 
   traits.forEach(trait => {
@@ -166,10 +169,10 @@ d3.csv("data/2020v2.csv").then(function(data) {
   cell.call(brushFx);
 
   svg2.selectAll("mydots")
-  .data(traits)
+  .data(regions)
   .enter()
   .append("rect")
-    .attr("x", 800)
+    .attr("x", 700)
     .attr("y", function(d,i){ return 50 + i*(15 + 5)}) // 100 is where the first dot appears. 25 is the distance between dots
     .attr("width", 15)
     .attr("height", 15)
@@ -177,10 +180,10 @@ d3.csv("data/2020v2.csv").then(function(data) {
 
 // Add one dot in the legend for each name.
   svg2.selectAll("mylabels")
-  .data(traits)
+  .data(regions)
   .enter()
   .append("text")
-    .attr("x", 800 + 15*1.2)
+    .attr("x", 700 + 15*1.2)
     .attr("y", function(d,i){ return 50 + i*(15+5) + (15/2)}) // 100 is where the first dot appears. 25 is the distance between dots
     .style("fill", function(d){ return color(d)})
     .text(function(d){ return d})
