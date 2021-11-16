@@ -1,5 +1,5 @@
 
-var margin = { top: 10, right: 30, bottom: 50, left: 60 },
+const margin = { top: 10, right: 30, bottom: 50, left: 60 },
   width = 1000 - margin.left - margin.right,
   height = 1000 - margin.top - margin.bottom;
 
@@ -27,7 +27,7 @@ const colorScale = d3.scaleThreshold()
   .range(d3.schemeReds[4]);
 
 
-var g = svg1.append("g")
+const g = svg1.append("g")
     .attr("class", "legendThreshold")
     .attr("transform", "translate(20,20)");
 g.append("text")
@@ -36,8 +36,8 @@ g.append("text")
     .attr("y", -6)
     .text("Scores");
 
-var labels = ['0', '2-4', '4-6', '6-8', '8-10'];
-var legend = d3.legendColor()
+const labels = ['0', '2-4', '4-6', '6-8', '8-10'];
+const legend = d3.legendColor()
     .labels(function (d) { return labels[d.i]; })
     .shapePadding(4)
     .scale(colorScale);
@@ -75,27 +75,27 @@ d3.csv("data/2020.csv", function(d) {
 
 
 
-var margin2 = { top: 10, right: 30, bottom: 50, left: 60 };
+const margin2 = { top: 10, right: 30, bottom: 50, left: 60 };
 
-var size = 140,
+const size = 140,
     padding = 20;
 
-var x = d3.scaleLinear()
+const x = d3.scaleLinear()
     .range([padding / 2, size - padding / 2]);
 
-var y = d3.scaleLinear()
+const y = d3.scaleLinear()
     .range([size - padding / 2, padding / 2]);
 
 let brushCell;
-var brushFx = d3.brush()
+const brushFx = d3.brush()
     .extent([[0, 0], [size, size]])
  
 
-var xAxis = d3.axisBottom()
+const xAxis = d3.axisBottom()
     .scale(x)
     .ticks(6);
 
-var yAxis = d3.axisLeft()
+const yAxis = d3.axisLeft()
     .scale(y)
     .ticks(6);
 
@@ -116,7 +116,7 @@ d3.csv("data/2020v2.csv").then(function(data) {
   'Commonwealth Nations', 'Sub-Saharan Africa', 'South Asia' ]
   const n = traits.length
 
-  var color = d3.scaleOrdinal()
+  const color = d3.scaleOrdinal()
     .domain(regions)
     .range(d3.schemeCategory10);
 
@@ -128,7 +128,7 @@ d3.csv("data/2020v2.csv").then(function(data) {
   yAxis.tickSize(-size * n);
 
 
-  var svg2 = d3
+  const svg2 = d3
       .select("#vis-svg-2")
       .append("svg")
       .attr("width", size * n + padding + 150 )
@@ -151,7 +151,7 @@ d3.csv("data/2020v2.csv").then(function(data) {
       .attr("transform", function(d, i) { return "translate(0," + i * size + ")"; })
       .each(function(d) { y.domain(domainByTrait[d]); d3.select(this).call(yAxis); });
 
-  var cell = svg2.selectAll(".cell")
+  const cell = svg2.selectAll(".cell")
       .data(cross(traits, traits))
     .enter().append("g")
       .attr("class", "cell")
@@ -195,7 +195,7 @@ d3.csv("data/2020v2.csv").then(function(data) {
     .style("alignment-baseline", "middle")
 
   function plot(p) {
-    var cell = d3.select(this);
+    const cell = d3.select(this);
 
     x.domain(domainByTrait[p.x]);
     y.domain(domainByTrait[p.y]);
@@ -230,7 +230,7 @@ d3.csv("data/2020v2.csv").then(function(data) {
 
   // Highlight the selected circles.
   function brushmove(p) {
-    var e = d3.brushSelection(this);
+    const e = d3.brushSelection(this);
     svg2.selectAll("circle").classed("hidden", function(d) {
       return e && (
         e[0][0] > x(+d[p.x]) || x(+d[p.x]) > e[1][0]
@@ -241,13 +241,13 @@ d3.csv("data/2020v2.csv").then(function(data) {
 
   // If the brush is empty, select all circles.
   function brushend() {
-    var e = d3.brushSelection(this);
+    const e = d3.brushSelection(this);
     if (!e) svg2.selectAll('.hidden').classed('hidden', false);
   }
 });
 
 function cross(a, b) {
-  var c = [], n = a.length, m = b.length;
+  const c = [], n = a.length, m = b.length;
   let i, j;
   for (i = -1; ++i < n;) for (j = -1; ++j < m;) c.push({x: a[i], i: i, y: b[j], j: j});
   return c;
