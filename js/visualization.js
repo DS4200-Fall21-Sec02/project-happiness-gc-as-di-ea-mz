@@ -10,7 +10,13 @@ const svg1 = d3
 .attr("width", width + margin.left + margin.right)
 .attr("height", height + margin.top + margin.bottom)
 .append("g")
-.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+.call(d3.zoom()
+  .scaleExtent([1,4])
+  .translateExtent([[0,0],[width,height]])
+  .on("zoom", function () {
+    svg1.attr("transform", d3.event.transform)
+  }));
 
 
 
@@ -76,12 +82,7 @@ Promise.all([
     return colorScale(d.total);
   })
 
-  .call(d3.zoom()
-  .scaleExtent([1,4])
-  .translateExtent([[0,0],[width,height]])
-  .on("zoom", function () {
-    svg1.attr("transform", d3.event.transform)
-  }))
+  
 
 
 });
