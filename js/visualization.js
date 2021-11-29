@@ -42,7 +42,9 @@ g.append("text")
 .attr("class", "caption")
 .attr("x", 0)
 .attr("y", -6)
-.text("Scores");
+.text("Happiness Scores");
+
+
 
 const labels = ['0', '2-4', '4-6', '6-8', '8-10'];
 const legend = d3.legendColor()
@@ -52,14 +54,20 @@ const legend = d3.legendColor()
 svg1.select(".legendThreshold")
 .call(legend);
 
+let year = 2018;
 
+const slider = d3.select("#year-slider")
+  .on("input", function() {
+    updateMap(Number(this.value));
+  });
 
 Promise.all([
+
+
   d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
 
-  d3.csv("data/2020.csv", function(d) {
-    console.log(d);
-
+  d3.csv("data/2018.csv", function(d) {
+ 
 
     data.set(d.Code, d.Score)
   })
@@ -82,10 +90,61 @@ Promise.all([
     return colorScale(d.total);
   })
 
+
+});
+
+
+
+function updateMap(year) {
+  const yearSpan = document.getElementById("selected-year");
+  yearSpan.innerText = `Year ${year}`;
+
+  year = `${year}`;
+
+  let csvYear = `../data/${year}.csv`
+
+  Promise.all([
+
+
+  d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
+
+  d3.csv(csvYear, function(d) {
+
+     console.log(d);
   
+
+    data.set(d.Code, d.Score)
+  })
+
+]).then(function(loadData){
+  let topo = loadData[0]
+
+  // Draw the map
+  svg1.append("g")
+  .selectAll("path")
+  .data(topo.features)
+  .join("path")
+  // draw each country
+  .attr("d", d3.geoPath()
+      .projection(projection)
+  )
+  // set the color of each country
+  .attr("fill", function (d) {
+    d.total = data.get(d.id) || 0;
+    return colorScale(d.total);
+  })
 
 
 });
+
+}
+
+
+
+
+
+
+
 
 
 
