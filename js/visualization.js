@@ -101,7 +101,7 @@ function updateMap(year) {
 
   year = `${year}`;
 
-  let csvYear = `../data/${year}.csv`
+  let csvYear = `data/${year}.csv`
 
   Promise.all([
 
