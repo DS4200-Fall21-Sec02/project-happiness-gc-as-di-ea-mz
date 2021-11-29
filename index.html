@@ -59,7 +59,10 @@
     <h1 x='50%' y='10%' text-anchor='middle'>World Happiness Map</h1>
 
 
-    
+    <div id="map">
+      <text id="selected-year">Year 2018</text>
+      <input name="year" type="range" min="2018" max="2020" id="year-slider" value="2018">
+      </div>
 
       
     <!-- Change viewbox to whatever you want, e.g., '0 0 1000 6000' This determines your aspect ratio and coordinate system -->    
@@ -70,10 +73,7 @@
 
       preserveAspectRatio='xMidYMid meet' class='vis-svg' viewBox='0 0 1000 1000' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
 
-      <div id="map">
-      <h3 id="selected-year">Year 2018</h3>
-      <input name="year" type="range" min="2018" max="2020" id="year-slider" value="2018">
-      </div>
+      
 
       
 
