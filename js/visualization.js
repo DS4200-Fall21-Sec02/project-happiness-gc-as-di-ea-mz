@@ -54,19 +54,96 @@ const legend = d3.legendColor()
 svg1.select(".legendThreshold")
 .call(legend);
 
+
+
+
 let year = 2018;
 
 const slider = d3.select("#year-slider")
   .on("input", function() {
     updateMap(Number(this.value));
+    updateStats(Number(this.value));
   });
+
+
+
+  d3.csv("data/2018.csv").then(function(data) {
+
+  const maxScore = (Number(d3.max(data, function(d) {return d['Score']}))).toFixed(3)
+  const minScore = (Number(d3.min(data, function(d) {return d['Score']}))).toFixed(3)
+  const meanScore = d3.mean(data, function(d) {return d['Score']}).toFixed(3)
+
+  const hapColors = ['#f0675c', '#375d81','#d4273e'];
+
+
+
+d3.select('.stats')
+  .selectAll('.count')
+  .data(hapColors)
+  .style('background', function(d) {return d})
+
+d3.select('.max')
+.text(maxScore)
+.style("font-weight", "bold");
+
+
+d3.select('.mean').text(meanScore).style("font-weight", "bold");
+d3.select('.min').text(minScore)
+.style("font-weight", "bold");
+
+
+
+});
+
+
+function updateStats(year) {
+  
+  year = `${year}`;
+
+  let csvYear = `data/${year}.csv`
+
+
+  d3.csv(csvYear).then(function(data) {
+
+
+  const maxScore = (Number(d3.max(data, function(d) {return d['Score']}))).toFixed(3);
+
+  const minScore = (Number(d3.min(data, function(d) {return d['Score']}))).toFixed(3)
+  const meanScore = (Number(d3.mean(data, function(d) {return d['Score']}))).toFixed(3);
+
+  const hapColors = ['#f0675c', '#375d81','#d4273e'];
+
+
+
+d3.select('.stats')
+  .selectAll('.count')
+  .data(hapColors)
+  .style('background', function(d) {return d})
+
+d3.select('.max')
+.text(maxScore)
+.style("font-weight", "bold");
+
+
+d3.select('.mean').text(meanScore).style("font-weight", "bold");
+d3.select('.min').text(minScore)
+.style("font-weight", "bold");
+
+
+
+})
+
+  ;
+
+}
+
 
 // Tooltip for map
 
 const tooltip = d3.select('body').append("div")
     .attr("class", "tooltip")
     .style("opacity", 0)
-    .attr("width", 400);
+    .attr("width", 0);
 
 Promise.all([
 
@@ -104,7 +181,7 @@ Promise.all([
     d3.select(this)
       .attr("stroke", "grey").attr("stroke-width", 2)
     tooltip.style("opacity", 1)
-           .html(d.properties['name'] + "<br/> Score:" + d.total + "<br/> ")
+           .html(d.properties['name'] + "<br/> Score: " + (Number(d.total)).toFixed(3) + "<br/> ")
            .style("top", (d3.event.pageY -75) + "px")
            .style("left", (d3.event.pageX -25) + "px")
   
@@ -165,7 +242,7 @@ function updateMap(year) {
     d3.select(this)
       .attr("stroke", "grey").attr("stroke-width", 2)
     tooltip.style("opacity", 1)
-           .html(d.properties['name'] + "<br/> Score:" + d.total + "<br/> ")
+           .html(d.properties['name'] + "<br/> Score: " + (Number(d.total)).toFixed(3) + "<br/> ")
            .style("top", (d3.event.pageY -75) + "px")
            .style("left", (d3.event.pageX -25) + "px")
   
@@ -377,3 +454,11 @@ function cross(a, b) {
   for (i = -1; ++i < n;) for (j = -1; ++j < m;) c.push({x: a[i], i: i, y: b[j], j: j});
   return c;
 }
+
+
+
+
+
+
+
+
