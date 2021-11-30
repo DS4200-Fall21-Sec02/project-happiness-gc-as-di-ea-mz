@@ -44,6 +44,7 @@ g.append("text")
 .text("Happiness Scores");
 
 
+// Labels for the legend
 
 const labels = ['0', '2-4', '4-6', '6-8', '8-10'];
 const legend = d3.legendColor()
@@ -60,6 +61,7 @@ const slider = d3.select("#year-slider")
     updateMap(Number(this.value));
   });
 
+// Tooltip for map
 
 const tooltip = d3.select('body').append("div")
     .attr("class", "tooltip")
@@ -73,7 +75,7 @@ Promise.all([
   d3.csv("data/2018.csv", function(d) {
  
 
-    data.set(d.Code, d.Score, d.Generosity)
+    data.set(d.Code, d.Score)
   })
 
 ]).then(function(loadData){
@@ -114,6 +116,7 @@ Promise.all([
 });
 
 
+// Updates the map based on year
 
 function updateMap(year) {
   const yearSpan = document.getElementById("selected-year");
@@ -226,6 +229,8 @@ d3.csv("data/2020v2.csv").then(function(data) {
   .on('end', brushend)
 
   const domainByTrait = {}
+
+  // Gets features apart from the region
   const traits = d3.keys(data[0]).filter(d => d !== 'Region')
   const regions = ['Western Europe','North America and ANZ', 'Middle East and North Africa',
     'Latin America and Caribbean', 'Central and Eastern Europe', 'East Asia', 'Southeast Asia',
