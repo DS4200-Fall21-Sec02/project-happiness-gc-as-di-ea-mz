@@ -92,7 +92,7 @@ circle.hidden {
   border-radius: 50%;
   width: 150px;
   height: 150px;
-  padding: 25px;
+  padding: 60px;
 }
 
 .count span {
@@ -116,7 +116,7 @@ circle.hidden {
 .min {
   padding: 15px;
   font-weight: bold;
-  
+
 }
 
 .mean {

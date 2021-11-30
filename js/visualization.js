@@ -122,7 +122,8 @@ d3.select('.stats')
 
 d3.select('.max')
 .text(maxScore)
-.style("font-weight", "bold");
+.style("font-weight", "bold")
+.attr("x", 50);
 
 
 d3.select('.mean').text(meanScore).style("font-weight", "bold");
