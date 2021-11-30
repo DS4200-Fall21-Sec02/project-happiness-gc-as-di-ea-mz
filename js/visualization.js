@@ -65,7 +65,8 @@ const slider = d3.select("#year-slider")
 
 const tooltip = d3.select('body').append("div")
     .attr("class", "tooltip")
-    .style("opacity", 0);
+    .style("opacity", 0)
+    .attr("width", 400);
 
 Promise.all([
 
@@ -73,13 +74,16 @@ Promise.all([
   d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
 
   d3.csv("data/2018.csv", function(d) {
- 
+    console.log(d);
 
+    
+ 
     data.set(d.Code, d.Score)
   })
 
 ]).then(function(loadData){
   let topo = loadData[0]
+  
 
   // Draw the map
   svg1.append("g")
