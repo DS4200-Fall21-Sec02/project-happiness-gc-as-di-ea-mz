@@ -1,4 +1,3 @@
-
 const margin = { top: 10, right: 30, bottom: 50, left: 60 },
     width = 1000 - margin.left - margin.right,
     height = 1000 - margin.top - margin.bottom;
@@ -74,7 +73,7 @@ Promise.all([
   d3.csv("data/2018.csv", function(d) {
  
 
-    data.set(d.Code, d.Score)
+    data.set(d.Code, d.Score, d.Generosity)
   })
 
 ]).then(function(loadData){
@@ -99,7 +98,7 @@ Promise.all([
     d3.select(this)
       .attr("stroke", "grey").attr("stroke-width", 2)
     tooltip.style("opacity", 1)
-           .html(d.Country + "<br/> Score:" + d.Score + "<br/> ")
+           .html(d.properties['name'] + "<br/> Score:" + d.total + "<br/> ")
            .style("top", (d3.event.pageY -75) + "px")
            .style("left", (d3.event.pageX -25) + "px")
   
@@ -159,7 +158,7 @@ function updateMap(year) {
     d3.select(this)
       .attr("stroke", "grey").attr("stroke-width", 2)
     tooltip.style("opacity", 1)
-           .html(d.Country + "<br/> Score:" + d.Score + "<br/> ")
+           .html(d.properties['name'] + "<br/> Score:" + d.total + "<br/> ")
            .style("top", (d3.event.pageY -75) + "px")
            .style("left", (d3.event.pageX -25) + "px")
   
