@@ -61,6 +61,11 @@ const slider = d3.select("#year-slider")
     updateMap(Number(this.value));
   });
 
+
+const tooltip = d3.select('body').append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
 Promise.all([
 
 
@@ -89,6 +94,22 @@ Promise.all([
     d.total = data.get(d.id) || 0;
     return colorScale(d.total);
   })
+  // add hover event to each country
+  .on("mouseover", function(d){
+    d3.select(this)
+      .attr("stroke", "grey").attr("stroke-width", 2)
+    tooltip.style("opacity", 1)
+           .html(d.score)
+           .style("top", (d3.event.pageY -75) + "px")
+           .style("left", (d3.event.pageX -25) + "px")
+  
+    
+  })
+  .on("mouseout", function(d){
+    d3.select(this)
+      .attr("stroke", null)
+    tooltip.style("opacity", 0);
+  });
 
 
 });
