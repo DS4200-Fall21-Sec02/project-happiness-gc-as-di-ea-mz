@@ -139,14 +139,13 @@ d3.select('.min').text(minScore)
 
 
 // Tooltip for map
-
 const tooltip = d3.select('body').append("div")
     .attr("class", "tooltip")
     .style("opacity", 0)
     .attr("width", 0);
 
 
-
+// 2018csv: create dictionaries that store countries' names and their corresponding attributes 
 const dict = {};
 const dict1 = {};
 const dict2= {};
@@ -197,7 +196,7 @@ Promise.all([
     d.total = data.get(d.id) || 0;
     return colorScale(d.total);
   })
-  // add hover event to each country
+  // add hover event to each country: show the tooltip that indicates country name and attributes
   .on("mouseover", function(d){
     d3.select(this)
       .attr("stroke", "grey").attr("stroke-width", 2)
@@ -208,6 +207,7 @@ Promise.all([
   
     
   })
+  //set tooltip invisible when the mouse leaves
   .on("mouseout", function(d){
     d3.select(this)
       .attr("stroke", null)
@@ -228,6 +228,8 @@ function updateMap(year) {
 
   let csvYear = `data/${year}.csv`
 
+
+//create dictionaries that store countries' names and their corresponding attributes
 const dict = {};
 const dict1 = {};
 const dict2= {};
@@ -243,9 +245,6 @@ d3.csv(csvYear).then(function(data1) {
     dict4[d.Country] = [d['Freedom to make life choices']]
     dict5[d.Country] = [d['Perceptions of corruption']]
 
-    
-    
-  
 });
 });
 
@@ -279,7 +278,7 @@ d3.csv(csvYear).then(function(data1) {
     d.total = data.get(d.id) || 0;
     return colorScale(d.total);
   })
-  // add hover event to each country
+  // add hover event to each country:show the tooltip that indicates country name and attributes
   .on("mouseover", function(d){
     d3.select(this)
       .attr("stroke", "grey").attr("stroke-width", 2)
@@ -290,6 +289,7 @@ d3.csv(csvYear).then(function(data1) {
   
     
   })
+  //set tooltip invisible when the mouse leaves
   .on("mouseout", function(d){
     d3.select(this)
       .attr("stroke", null)
@@ -308,32 +308,26 @@ d3.csv(csvYear).then(function(data1) {
 
 
 
-
-
-
-
-
-
-
-
-
-
+//set some basic variables 
 const margin2 = { top: 10, right: 30, bottom: 50, left: 60 };
 
 const size = 140,
     padding = 20;
 
+//x and y scales
 const x = d3.scaleLinear()
 .range([padding / 2, size - padding / 2]);
 
 const y = d3.scaleLinear()
 .range([size - padding / 2, padding / 2]);
 
+//initializes brush cell
 let brushCell;
 const brushFx = d3.brush()
 .extent([[0, 0], [size, size]])
 
 
+// x and y axis
 const xAxis = d3.axisBottom()
 .scale(x)
 .ticks(6);
@@ -344,7 +338,7 @@ const yAxis = d3.axisLeft()
 
 
 
-
+//create brushing
 d3.csv("data/2020v2.csv").then(function(data) {
   brushFx
   .on('start', brushstart)
@@ -360,10 +354,14 @@ d3.csv("data/2020v2.csv").then(function(data) {
     'Commonwealth Nations', 'Sub-Saharan Africa', 'South Asia' ]
   const n = traits.length
 
+
+  //color scale
   const color = d3.scaleOrdinal()
   .domain(regions)
   .range(d3.schemeCategory10);
 
+
+ //store the domain of each trait 
   traits.forEach(trait => {
     domainByTrait[trait] = d3.extent(data, d => d[trait]);
   });
@@ -371,7 +369,7 @@ d3.csv("data/2020v2.csv").then(function(data) {
   xAxis.tickSize(size * n);
   yAxis.tickSize(-size * n);
 
-
+//create the background and x, y axis 
   const svg2 = d3
   .select("#vis-svg-2")
   .append("svg")
@@ -395,6 +393,7 @@ d3.csv("data/2020v2.csv").then(function(data) {
   .attr("transform", function(d, i) { return "translate(0," + i * size + ")"; })
   .each(function(d) { y.domain(domainByTrait[d]); d3.select(this).call(yAxis); });
 
+//draw each cell
   const cell = svg2.selectAll(".cell")
   .data(cross(traits, traits))
   .enter().append("g")
@@ -414,6 +413,8 @@ d3.csv("data/2020v2.csv").then(function(data) {
 
   cell.call(brushFx);
 
+//creating legends
+//draw the dots
   svg2.selectAll("mydots")
   .data(regions)
   .enter()
@@ -438,6 +439,7 @@ d3.csv("data/2020v2.csv").then(function(data) {
   .attr("text-anchor", "left")
   .style("alignment-baseline", "middle")
 
+//define the plot function that draws each cell
   function plot(p) {
     const cell = d3.select(this);
 
