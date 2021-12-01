@@ -417,7 +417,7 @@ d3.csv("data/2020v2.csv").then(function(data) {
 
   // Titles for the diagonal.
   cell.filter(function(d) { return d.i === d.j; }).append("text")
-  .attr("x", padding)
+  .attr("x", padding - 8)
   .attr("y", padding)
   .attr("dy", ".71em")
   .text(function(d) { return d.x; });
