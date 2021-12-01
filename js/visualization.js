@@ -302,8 +302,8 @@ d3.csv(csvYear).then(function(data1) {
       .attr("stroke", "grey").attr("stroke-width", 2)
     tooltip.style("opacity", 1)
            .html(d.properties['name'] + " <b>Score</b>: " + (Number(d.total)).toFixed(3) + " <b>Generosity</b>: " + dict[d.properties['name']] + " <b>Social support</b>: " + dict1[d.properties['name']]+ " <b>GDP</b>: " + dict2[d.properties['name']]+ " <b>Healthy life expectancy</b>: " + dict3[d.properties['name']] + " <b>Freedom to make life choices</b>: " + dict4[d.properties['name']]+ " <b>Perceptions of corruption</b>: " + dict5[d.properties['name']] )
-           .style("top", (d3.event.pageY -75) + "px")
-           .style("left", (d3.event.pageX -25) + "px")
+           .style("top", (d3.event.pageY - 75) + "px")
+           .style("left", (d3.event.pageX - 25) + "px")
   
     
   })
