@@ -145,6 +145,27 @@ const tooltip = d3.select('body').append("div")
     .style("opacity", 0)
     .attr("width", 0);
 
+
+
+const dict = {};
+const dict1 = {};
+const dict2= {};
+const dict3 = {};
+const dict4 = {};
+const dict5 = {};
+d3.csv("data/2018.csv").then(function(data1) {
+  data1.forEach(function(d,i){
+    dict[d.Country] = [d.Generosity]
+    dict1[d.Country] = [d['Social support']]
+    dict2[d.Country] = [d['GDP per capita']]
+    dict3[d.Country] = [d['Healthy life expectancy']]
+    dict4[d.Country] = [d['Freedom to make life choices']]
+    dict5[d.Country] = [d['Perceptions of corruption']]
+    console.log(dict['USA']);
+  
+});
+});
+
 Promise.all([
 
 
@@ -181,7 +202,7 @@ Promise.all([
     d3.select(this)
       .attr("stroke", "grey").attr("stroke-width", 2)
     tooltip.style("opacity", 1)
-           .html(d.properties['name'] + "<br/> Score: " + (Number(d.total)).toFixed(3) + "<br/> ")
+           .html(d.properties['name'] + " <b>Score</b>: " + (Number(d.total)).toFixed(3) + " <b>Generosity</b>: " + dict[d.properties['name']] + " <b>Social support</b>: " + dict1[d.properties['name']]+ " <b>GDP</b>: " + dict2[d.properties['name']]+ " <b>Healthy life expectancy</b>: " + dict3[d.properties['name']] + " <b>Freedom to make life choices</b>: " + dict4[d.properties['name']]+ " <b>Perceptions of corruption</b>: " + dict5[d.properties['name']] )
            .style("top", (d3.event.pageY -75) + "px")
            .style("left", (d3.event.pageX -25) + "px")
   
@@ -206,6 +227,27 @@ function updateMap(year) {
   year = `${year}`;
 
   let csvYear = `data/${year}.csv`
+
+const dict = {};
+const dict1 = {};
+const dict2= {};
+const dict3 = {};
+const dict4 = {};
+const dict5 = {};
+d3.csv(csvYear).then(function(data1) {
+  data1.forEach(function(d,i){
+    dict[d.Country] = [d.Generosity]
+    dict1[d.Country] = [d['Social support']]
+    dict2[d.Country] = [d['GDP per capita']]
+    dict3[d.Country] = [d['Healthy life expectancy']]
+    dict4[d.Country] = [d['Freedom to make life choices']]
+    dict5[d.Country] = [d['Perceptions of corruption']]
+
+    
+    
+  
+});
+});
 
   Promise.all([
 
@@ -242,7 +284,7 @@ function updateMap(year) {
     d3.select(this)
       .attr("stroke", "grey").attr("stroke-width", 2)
     tooltip.style("opacity", 1)
-           .html(d.properties['name'] + "<br/> Score: " + (Number(d.total)).toFixed(3) + "<br/> ")
+           .html(d.properties['name'] + " <b>Score</b>: " + (Number(d.total)).toFixed(3) + " <b>Generosity</b>: " + dict[d.properties['name']] + " <b>Social support</b>: " + dict1[d.properties['name']]+ " <b>GDP</b>: " + dict2[d.properties['name']]+ " <b>Healthy life expectancy</b>: " + dict3[d.properties['name']] + " <b>Freedom to make life choices</b>: " + dict4[d.properties['name']]+ " <b>Perceptions of corruption</b>: " + dict5[d.properties['name']] )
            .style("top", (d3.event.pageY -75) + "px")
            .style("left", (d3.event.pageX -25) + "px")
   

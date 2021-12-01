@@ -1,22 +1,26 @@
 /* General formatting */
-body {
-	padding: 0 10px;
-	font: 18px/1.5 -apple-system, BlinkMacSystemFont, "avenir next",avenir, "Segoe UI", "lucida grande", "helvetica neue", helvetica, "Fira Sans",roboto, noto, "Droid Sans", cantarell, oxygen, ubuntu, "franklin gothic medium", "century gothic", "Liberation Sans",
-	sans-serif;
-}
-
 .tooltip {
-	    font: 6px;
+	    font: 1px;
       color: black; 
+      max-width: 30rem;
       background: lightsteelblue; 
       border-radius: 10px; 
       box-shadow: 0px 0px 2px 0px #a6a6a6; 
-      padding: 2px; 
+      padding: 1px; 
       text-shadow: #f5f5f5 0 1px 0;
       position: absolute;
-      width:150px;
-      height: 60px;
+      width: 500px;
+      min-height:  70px;
+
       }
+
+
+body {
+	padding: 0 10px;
+	font: 14px/1.5 -apple-system, BlinkMacSystemFont, "avenir next",avenir, "Segoe UI", "lucida grande", "helvetica neue", helvetica, "Fira Sans",roboto, noto, "Droid Sans", cantarell, oxygen, ubuntu, "franklin gothic medium", "century gothic", "Liberation Sans",
+	sans-serif;
+}
+
 
 h1, h2, h3 {
 	line-height: 1.2;
