@@ -33,6 +33,7 @@ a {
 svg {
   font: 10px sans-serif;
   padding: 10px;
+
 }
 
 
@@ -84,10 +85,12 @@ circle.hidden {
 .vis-holder {
   width: 100%;
   height: 100%;
+
 }
 
 .vis-svg {
-  background-color: #f4f1f0;
+  background-color: white;
+
 }
 
 .count {
