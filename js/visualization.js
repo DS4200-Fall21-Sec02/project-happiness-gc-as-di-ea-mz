@@ -3,6 +3,7 @@ const margin = { top: 10, right: 30, bottom: 50, left: 60 },
     height = 1000 - margin.top - margin.bottom;
 
 
+
 const svg1 = d3
 .select("#vis-svg-1")
 .append("svg")
@@ -28,6 +29,7 @@ const projection = d3.geoMercator()
 
 
 // Data and color scale
+
 let data = new Map()
 const colorScale = d3.scaleThreshold()
 .domain([2, 4, 6, 8])
@@ -41,7 +43,8 @@ g.append("text")
 .attr("class", "caption")
 .attr("x", 0)
 .attr("y", -6)
-.text("Happiness Scores");
+.text("Happiness Scores")
+.attr("font-weight", "bold");
 
 
 // Labels for the legend
@@ -59,6 +62,8 @@ svg1.select(".legendThreshold")
 
 let year = 2018;
 
+// Creates a slider which allows user to choose a year
+
 const slider = d3.select("#year-slider")
   .on("input", function() {
     updateMap(Number(this.value));
@@ -66,8 +71,9 @@ const slider = d3.select("#year-slider")
   });
 
 
-
   d3.csv("data/2018.csv").then(function(data) {
+
+  // Calculates statistics for the happiness score
 
   const maxScore = (Number(d3.max(data, function(d) {return d['Score']}))).toFixed(3)
   const minScore = (Number(d3.min(data, function(d) {return d['Score']}))).toFixed(3)
@@ -75,25 +81,27 @@ const slider = d3.select("#year-slider")
 
   const hapColors = ['#f0675c', '#375d81','#d4273e'];
 
-
-
-d3.select('.stats')
+  d3.select('.stats')
   .selectAll('.count')
   .data(hapColors)
   .style('background', function(d) {return d})
 
-d3.select('.max')
-.text(maxScore)
-.style("font-weight", "bold");
+  // Displays min, max, and mean happiness score
 
+  d3.select('.max')
+  .text(maxScore)
+  .style("font-weight", "bold");
 
-d3.select('.mean').text(meanScore).style("font-weight", "bold");
-d3.select('.min').text(minScore)
-.style("font-weight", "bold");
+  
 
+  d3.select('.mean').text(meanScore).style("font-weight", "bold");
+  d3.select('.min').text(minScore)
+  .style("font-weight", "bold");
 
 
 });
+
+// Changes the statistics depending on the year chosen on the slider 
 
 
 function updateStats(year) {
@@ -102,8 +110,11 @@ function updateStats(year) {
 
   let csvYear = `data/${year}.csv`
 
+  // Loads the file depending on the given year
 
   d3.csv(csvYear).then(function(data) {
+
+  // Calculates statistics for the happiness score for the year
 
 
   const maxScore = (Number(d3.max(data, function(d) {return d['Score']}))).toFixed(3);
@@ -115,19 +126,20 @@ function updateStats(year) {
 
 
 
-d3.select('.stats')
+  d3.select('.stats')
   .selectAll('.count')
   .data(hapColors)
   .style('background', function(d) {return d})
 
-d3.select('.max')
-.text(maxScore)
-.style("font-weight", "bold");
+  // Displays min, max, and mean happiness score for the year
+
+  d3.select('.max')
+  .text(maxScore)
+  .style("font-weight", "bold");
 
 
-d3.select('.mean').text(meanScore).style("font-weight", "bold");
-d3.select('.min').text(minScore)
-.style("font-weight", "bold");
+  d3.select('.mean').text(meanScore).style("font-weight", "bold");
+  d3.select('.min').text(minScore).style("font-weight", "bold");
 
 
 
@@ -145,7 +157,7 @@ const tooltip = d3.select('body').append("div")
     .attr("width", 0);
 
 
-// 2018csv: create dictionaries that store countries' names and their corresponding attributes 
+// 2018 csv: create dictionaries that store countries' names and their corresponding attributes 
 const dict = {};
 const dict1 = {};
 const dict2= {};
@@ -175,6 +187,8 @@ Promise.all([
 
     
  
+  // initializes the map to store the country code as a key and the score as a value
+
     data.set(d.Code, d.Score)
   })
 
@@ -207,6 +221,7 @@ Promise.all([
   
     
   })
+
   //set tooltip invisible when the mouse leaves
   .on("mouseout", function(d){
     d3.select(this)
@@ -225,6 +240,8 @@ function updateMap(year) {
   yearSpan.innerText = `Year ${year}`;
 
   year = `${year}`;
+
+  // Changes the csv depending on the year chosen on the slider 
 
   let csvYear = `data/${year}.csv`
 
@@ -257,6 +274,7 @@ d3.csv(csvYear).then(function(data1) {
 
      console.log(d);
   
+  // initializes the map to store the country code as a key and the score as a value
 
     data.set(d.Code, d.Score)
   })
@@ -301,10 +319,6 @@ d3.csv(csvYear).then(function(data1) {
 });
 
 }
-
-
-
-
 
 
 
