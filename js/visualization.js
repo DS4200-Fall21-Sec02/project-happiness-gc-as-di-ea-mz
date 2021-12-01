@@ -2,7 +2,12 @@ const margin = { top: 10, right: 30, bottom: 50, left: 60 },
     width = 1000 - margin.left - margin.right,
     height = 1000 - margin.top - margin.bottom;
 
-
+const zoom = d3.zoom()
+  .scaleExtent([1,5])
+  .translateExtent([[0,5],[width,height]])
+  .on("zoom", function () {
+    svg1.attr("transform", d3.event.transform)
+  })
 
 const svg1 = d3
 .select("#vis-svg-1")
@@ -11,13 +16,9 @@ const svg1 = d3
 .attr("height", height + margin.top + margin.bottom)
 .append("g")
 .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-//adding zoom 
-.call(d3.zoom()
-  .scaleExtent([1,4])
-  .translateExtent([[0,0],[width,height]])
-  .on("zoom", function () {
-    svg1.attr("transform", d3.event.transform)
-  }));
+.call(zoom);
+
+
 
 
 
@@ -350,6 +351,7 @@ const xAxis = d3.axisBottom()
 const yAxis = d3.axisLeft()
 .scale(y)
 .ticks(6);
+
 
 
 
