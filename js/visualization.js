@@ -11,6 +11,7 @@ const svg1 = d3
 .attr("height", height + margin.top + margin.bottom)
 .append("g")
 .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+//adding zoom 
 .call(d3.zoom()
   .scaleExtent([1,4])
   .translateExtent([[0,0],[width,height]])
