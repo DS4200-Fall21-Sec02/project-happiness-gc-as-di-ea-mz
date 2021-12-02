@@ -365,6 +365,8 @@ const yAxis = d3.axisLeft()
 
 //create brushing
 d3.csv("data/2020v2.csv").then(function(data) {
+
+  
   brushFx
   .on('start', brushstart)
   .on('brush', brushmove)

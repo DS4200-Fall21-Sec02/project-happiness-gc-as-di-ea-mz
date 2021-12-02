@@ -26,6 +26,13 @@ h1, h2, h3 {
 	line-height: 1.2;
 }
 
+p {
+	line-height: 1.5;
+	font: 18px sans-serif;
+	display: block;
+
+}
+
 a {
   color: #e81c4f;
 }
@@ -79,6 +86,7 @@ circle.hidden {
 .content-column {
 	max-width: 650px;
 	margin: 40px auto;
+
 }
 
 /* But your visualization should be full-width and full-height */
