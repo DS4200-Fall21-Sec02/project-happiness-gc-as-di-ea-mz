@@ -125,7 +125,7 @@ function updateStats(year) {
 
   const minScore = (Number(d3.min(data, function(d) {return d['Score']}))).toFixed(3)
   const meanScore = (Number(d3.mean(data, function(d) {return d['Score']}))).toFixed(3);
-  // let minCountry = data.reduce((min, datum) => datum.Country > datum.Country ? min : datum["Country"]);
+  let minCountry = data.reduce((min, datum) => datum.Country > datum.Country ? min : datum["Country"]);
   // let maxCountry = data.reduce((max, datum) => datum.Country < datum.Country ? max : datum["Country"]);
   const hapColors = ['#f0675c', '#375d81','#d4273e'];
 
@@ -146,7 +146,7 @@ function updateStats(year) {
 
   d3.select('.mean').text(meanScore).style("font-weight", "bold");
   d3.select('.min')
-  .text(minScore)
+  .text(minScore + " " + minCountry)
   .style("font-weight", "bold");
 
 
