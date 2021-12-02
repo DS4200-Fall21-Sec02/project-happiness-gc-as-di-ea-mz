@@ -66,7 +66,7 @@ svg1.select(".legendThreshold")
 
 
 
-let year = 2018;
+let year = 2020;
 
 // Creates a slider which allows user to choose a year
 
@@ -77,7 +77,7 @@ const slider = d3.select("#year-slider")
   });
 
 
-  d3.csv("data/2018.csv").then(function(data) {
+  d3.csv("data/2020.csv").then(function(data) {
 
   // Calculates statistics for the happiness score
 
@@ -169,14 +169,14 @@ const tooltip = d3.select('body').append("div")
     .attr("width", 0);
 
 
-// 2018 csv: create dictionaries that store countries' names and their corresponding attributes 
+// 2020 csv: create dictionaries that store countries' names and their corresponding attributes 
 const dict = {};
 const dict1 = {};
 const dict2= {};
 const dict3 = {};
 const dict4 = {};
 const dict5 = {};
-d3.csv("data/2018.csv").then(function(data1) {
+d3.csv("data/2020.csv").then(function(data1) {
   data1.forEach(function(d,i){
     dict[d.Country] = [d.Generosity]
     dict1[d.Country] = [d['Social support']]
@@ -194,7 +194,7 @@ Promise.all([
 
   d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
 
-  d3.csv("data/2018.csv", function(d) {
+  d3.csv("data/2020.csv", function(d) {
 
   // initializes the map to store the country code as a key and the score as a value
 
