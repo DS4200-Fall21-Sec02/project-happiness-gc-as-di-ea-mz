@@ -27,7 +27,7 @@ h1, h2, h3 {
 }
 
 p {
-	line-height: 1.5;
+	line-height: 1.5 !important;
 	font: 18px sans-serif;
 	display: block;
 
