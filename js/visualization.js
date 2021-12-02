@@ -180,7 +180,7 @@ d3.csv("data/2020.csv").then(function(data1) {
   data1.forEach(function(d,i){
     dict[d.Country] = [d.Generosity]
     dict1[d.Country] = [d['Social support']]
-    dict2[d.Country] = [d['GDP per capita']]
+    dict2[d.Country] = [d['Logged GDP per capita']]
     dict3[d.Country] = [d['Healthy life expectancy']]
     dict4[d.Country] = [d['Freedom to make life choices']]
     dict5[d.Country] = [d['Perceptions of corruption']]
