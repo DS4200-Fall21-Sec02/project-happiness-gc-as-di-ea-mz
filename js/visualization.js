@@ -1,14 +1,19 @@
+// variables
 const margin = { top: 10, right: 30, bottom: 50, left: 60 },
     width = 1000 - margin.left - margin.right,
     height = 1000 - margin.top - margin.bottom;
 
+
+//zoom functionality
 const zoom = d3.zoom()
   .scaleExtent([1,5])
   .translateExtent([[0,5],[width,height]])
   .on("zoom", function () {
-    svg1.attr("transform", d3.event.transform)
+    svg1.attr("transform", d3.event.transform);
   })
 
+
+// create frist vis
 const svg1 = d3
 .select("#vis-svg-1")
 .append("svg")
@@ -21,8 +26,8 @@ const svg1 = d3
 
 
 
-
-const path = d3.geoPath();
+// map variables
+const path = d3.geoPath();;
 const projection = d3.geoMercator()
 .scale(130)
 .center([0,20])
@@ -37,7 +42,7 @@ const colorScale = d3.scaleThreshold()
 .domain([2, 4, 6, 8])
 .range(d3.schemeReds[4]);
 
-
+// adds legend to first vis
 const g = svg1.append("g")
 .attr("class", "legendThreshold")
 .attr("transform", "translate(20,20)");
@@ -61,7 +66,6 @@ svg1.select(".legendThreshold")
 
 
 
-
 let year = 2018;
 
 // Creates a slider which allows user to choose a year
@@ -77,14 +81,18 @@ const slider = d3.select("#year-slider")
 
   // Calculates statistics for the happiness score
 
-  const maxScore = (Number(d3.max(data, function(d) {return d['Score']}))).toFixed(3)
-  const minScore = (Number(d3.min(data, function(d) {return d['Score']}))).toFixed(3)
-  const meanScore = d3.mean(data, function(d) {return d['Score']}).toFixed(3)
+  const maxScore = (Number(d3.max(data, function(d) {return d['Score']}))).toFixed(3);
+  const minScore = (Number(d3.min(data, function(d) {return d['Score']}))).toFixed(3);
+  const meanScore = d3.mean(data, function(d) {return d['Score']}).toFixed(3);
+
+  // determines which countries have the min and max scores
   const minCountry = data.reduce((min, datum) => datum.Country > datum.Country ? min : datum["Country"]);
   const maxCountry = data.reduceRight((max, datum) => datum.Country < datum.Country ? max : datum["Country"]);
 
 
   const hapColors = ['#f0675c', '#375d81','#d4273e'];
+
+
 
   d3.select('.stats')
   .selectAll('.count')
@@ -97,9 +105,6 @@ const slider = d3.select("#year-slider")
   .text(maxScore + " " + maxCountry)
   .style("font-size", "26px")
   .style("font-weight", "bold");
-
-
-  
 
   d3.select('.mean').text(meanScore).style("font-weight", "bold");
   d3.select('.min').text(minScore + " " + minCountry)
@@ -129,17 +134,17 @@ function updateStats(year) {
 
   const minScore = (Number(d3.min(data, function(d) {return d['Score']}))).toFixed(3)
   const meanScore = (Number(d3.mean(data, function(d) {return d['Score']}))).toFixed(3);
+
+  // determines which countries have the min and max scores
   let minCountry = data.reduce((min, datum) => datum.Country > datum.Country ? min : datum["Country"]);
   let maxCountry = data.reduceRight((max, datum) => datum.Country < datum.Country ? max : datum["Country"]);
   const hapColors = ['#f0675c', '#375d81','#d4273e'];
 
 
-
-
   d3.select('.stats')
   .selectAll('.count')
   .data(hapColors)
-  .style('background', function(d) {return d})
+  .style('background', function(d) {return d});
 
   // Displays min, max, and mean happiness score for the year
 
@@ -152,12 +157,7 @@ function updateStats(year) {
   d3.select('.min')
   .text(minScore + " " + minCountry)
   .style("font-weight", "bold");
-
-
-
-})
-
-  ;
+});
 
 }
 
@@ -195,10 +195,7 @@ Promise.all([
   d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
 
   d3.csv("data/2018.csv", function(d) {
-    console.log(d);
 
-    
- 
   // initializes the map to store the country code as a key and the score as a value
 
     data.set(d.Code, d.Score)
@@ -229,7 +226,7 @@ Promise.all([
     tooltip.style("opacity", 1)
            .html(d.properties['name'] + " <b>Score</b>: " + (Number(d.total)).toFixed(3) + " <b>Generosity</b>: " + dict[d.properties['name']] + " <b>Social support</b>: " + dict1[d.properties['name']]+ " <b>GDP</b>: " + dict2[d.properties['name']]+ " <b>Healthy life expectancy</b>: " + dict3[d.properties['name']] + " <b>Freedom to make life choices</b>: " + dict4[d.properties['name']]+ " <b>Perceptions of corruption</b>: " + dict5[d.properties['name']] )
            .style("top", (d3.event.pageY -75) + "px")
-           .style("left", (d3.event.pageX -25) + "px")
+           .style("left", (d3.event.pageX -25) + "px");
   
     
   })
@@ -332,8 +329,6 @@ d3.csv(csvYear).then(function(data1) {
 
 }
 
-
-
 //set some basic variables 
 const margin2 = { top: 10, right: 30, bottom: 50, left: 60 };
 
@@ -361,8 +356,6 @@ const xAxis = d3.axisBottom()
 const yAxis = d3.axisLeft()
 .scale(y)
 .ticks(6);
-
-
 
 
 //create brushing
@@ -436,7 +429,6 @@ d3.csv("data/2020v2.csv").then(function(data) {
   .attr("y", padding)
   .attr("dy", ".71em")
   .text(function(d) { return d.x; });
-
 
 
 
