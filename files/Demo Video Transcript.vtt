@@ -1,0 +1,44 @@
+WEBVTT
+
+1
+00:00:00.480 --> 00:00:03.210
+Our group has visualized world happiness and potential
+
+2
+00:00:03.240 --> 00:00:05.500
+contributing factors.
+
+3
+00:00:6.210 --> 00:00:14.200
+The first visualization is an interactive world map. The darker a country is, the higher its score on the world happiness index.
+
+4
+00:00:15.220 --> 00:00:21.400
+You can hover over any country to see its name, happiness index score, and other metrics.
+
+5
+00:00:21.800 --> 00:00:25.120
+And Double Click to zoom in closer on the country,
+
+6
+00:00:25.660 --> 00:00:28.310
+or zoom in and out manually.
+
+7
+00:00:34.170 --> 00:00:40.870
+You can also use the slider on the top left to view either 2018, 2019, or 2020.
+
+8
+00:00:41.140 --> 00:00:46.800
+The minimum, maximum, and average scores for the corresponding year appear above the map.
+
+9
+00:00:50.000 --> 00:01:02.170
+Below the world map is a scatter plot matrix comparing the other factors with the happiness index and each other. Each data point corresponds to a country and is colored based on which region that country is a part of.
+
+10
+00:01:08.240 --> 00:01:15.000
+Divya Iyer: By brushing over any data points the corresponding points in every other scatter plot will highlight.
+
+
+
