@@ -184,7 +184,7 @@ d3.csv("data/2020.csv").then(function(data1) {
     dict3[d.Country] = [d['Healthy life expectancy']]
     dict4[d.Country] = [d['Freedom to make life choices']]
     dict5[d.Country] = [d['Perceptions of corruption']]
-    console.log(dict['USA']);
+
   
 });
 });
@@ -310,7 +310,7 @@ d3.csv(csvYear).then(function(data1) {
     d3.select(this)
       .attr("stroke", "grey").attr("stroke-width", 2)
     tooltip.style("opacity", 1)
-           .html(d.properties['name'] + " <b>Score</b>: " + (Number(d.total)).toFixed(3) + " <b>Generosity</b>: " + dict[d.properties['name']] + " <b>Social support</b>: " + dict1[d.properties['name']]+ " <b>GDP</b>: " + dict2[d.properties['name']]+ " <b>Healthy life expectancy</b>: " + dict3[d.properties['name']] + " <b>Freedom to make life choices</b>: " + dict4[d.properties['name']]+ " <b>Perceptions of corruption</b>: " + dict5[d.properties['name']] )
+           .html(d.properties['name'] + " <b>Score</b>: " + (Number(d.total)).toFixed(3) + " <b>Generosity</b>: " + (Number(dict[d.properties['name']]).toFixed(3)) + " <b>Social support</b>: " + (Number(dict1[d.properties['name']]).toFixed(3))+ " <b>GDP</b>: " + (Number(dict2[d.properties['name']]).toFixed(3))+ " <b>Healthy life expectancy</b>: " + (Number(dict3[d.properties['name']]).toFixed(3)) + " <b>Freedom to make life choices</b>: " + (Number(dict4[d.properties['name']]).toFixed(3))+ " <b>Perceptions of corruption</b>: " + (Number(dict5[d.properties['name']]).toFixed(3)))
            .style("top", (d3.event.pageY - 75) + "px")
            .style("left", (d3.event.pageX - 25) + "px")
   
