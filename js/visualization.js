@@ -81,8 +81,8 @@ const slider = d3.select("#year-slider")
   const minScore = (Number(d3.min(data, function(d) {return d['Score']}))).toFixed(3)
   const meanScore = d3.mean(data, function(d) {return d['Score']}).toFixed(3)
   const minCountry = data.reduce((min, datum) => datum.Country > datum.Country ? min : datum["Country"]);
-  const maxCountry = data.reduce((max, datum) => datum.Country < datum.Country ? max : datum["Country"]);
-  //const maxCountry = (d3.max(data, function(d) {return d['Country']}))
+  const maxCountry = data.reduceRight((max, datum) => datum.Country < datum.Country ? max : datum["Country"]);
+
 
   const hapColors = ['#f0675c', '#375d81','#d4273e'];
 
@@ -94,14 +94,16 @@ const slider = d3.select("#year-slider")
   // Displays min, max, and mean happiness score
 
   d3.select('.max')
-  .text(maxScore)
+  .text(maxScore + " " + maxCountry)
+  .style("font-size", "26px")
   .style("font-weight", "bold");
 
 
   
 
   d3.select('.mean').text(meanScore).style("font-weight", "bold");
-  d3.select('.min').text(minScore)
+  d3.select('.min').text(minScore + " " + minCountry)
+  .style("font-size", "26px")
   .style("font-weight", "bold");
 
 
