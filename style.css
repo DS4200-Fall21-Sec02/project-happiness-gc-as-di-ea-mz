@@ -116,13 +116,13 @@ circle.hidden {
 
 .max {
   
-  padding: -20px;
+  padding: 15px;
   font-weight: bold;
   text-align: center;
 }
 
 .min {
-  padding: -20px;
+  padding: 15px;
   font-weight: bold;
   text-align: center;
 
