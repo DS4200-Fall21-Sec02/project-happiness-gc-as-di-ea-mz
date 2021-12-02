@@ -80,6 +80,8 @@ const slider = d3.select("#year-slider")
   const maxScore = (Number(d3.max(data, function(d) {return d['Score']}))).toFixed(3)
   const minScore = (Number(d3.min(data, function(d) {return d['Score']}))).toFixed(3)
   const meanScore = d3.mean(data, function(d) {return d['Score']}).toFixed(3)
+  let minCountry = data.reduce((min, datum) => datum.Country > datum.Country ? min : datum["Country"]);
+
   //const maxCountry = (d3.max(data, function(d) {return d['Country']}))
 
   const hapColors = ['#f0675c', '#375d81','#d4273e'];
@@ -99,7 +101,7 @@ const slider = d3.select("#year-slider")
   
 
   d3.select('.mean').text(meanScore).style("font-weight", "bold");
-  d3.select('.min').text(minScore)
+  d3.select('.min').text(minScore + " " + minCountry)
   .style("font-weight", "bold");
 
 
