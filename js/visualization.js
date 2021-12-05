@@ -281,8 +281,6 @@ d3.csv(csvYear).then(function(data1) {
 
   d3.csv(csvYear, function(d) {
 
-     console.log(d);
-  
   // initializes the map to store the country code as a key and the score as a value
 
     data.set(d.Code, d.Score)
